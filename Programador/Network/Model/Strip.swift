@@ -9,7 +9,6 @@
 //
 
 import Foundation
-import ImageViewer
 
 protocol StripProtocol {
     var title:String { get }
@@ -19,7 +18,6 @@ protocol StripProtocol {
     var description:String { get }
     var content:String { get }
     var imageURL:String? { get }
-    var galleryItem: GalleryItem { get }
 }
 
 class Strip : StripProtocol {
@@ -30,7 +28,6 @@ class Strip : StripProtocol {
     var description:String = ""
     var content:String = ""
     var imageURL:String?
-    var galleryItem: GalleryItem = GalleryItem.image { $0(UIImage(named: "0")!) }
     typealias buildStripClosure = (Strip) -> Void
     init(build:buildStripClosure) {
         build(self)

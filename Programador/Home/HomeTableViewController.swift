@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import ImageViewer
+import JSQWebViewController
+import KVLoading
 
 class HomeTableViewController: UITableViewController {
 
@@ -15,7 +16,13 @@ class HomeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadData()
+    }
+    
+    @IBAction func loadData(){
+        KVLoading.show()
         Programmer.getRSSData { (strips) in
+            KVLoading.hide()
             self.strips = strips
             self.tableView?.reloadData()
         }
@@ -41,9 +48,12 @@ class HomeTableViewController: UITableViewController {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath.row, animated: true)
-        //TODO: Show Image Full Screen
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let controller = WebViewController(url: NSURL(string: strips[indexPath.row].link)! as URL)
+        let nav = UINavigationController(rootViewController: controller)
+        present(nav, animated: true, completion: nil)
     }
 }
 

@@ -30,6 +30,7 @@
 		113D14F61ECF23E1001A9DF7 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeTableViewController.swift; path = Home/HomeTableViewController.swift; sourceTree = "<group>"; };
 		113D14F91ECF2470001A9DF7 /* Programer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Programer.swift; path = Network/Programer.swift; sourceTree = "<group>"; };
 		113D14FC1ECF3E12001A9DF7 /* Strip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Strip.swift; path = Network/Model/Strip.swift; sourceTree = "<group>"; };
+		116471B51ED7523B005AEBA4 /* Programador.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Programador.entitlements; sourceTree = "<group>"; };
 		119244631ED6718200C5347E /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = Extension/Extension.swift; sourceTree = "<group>"; };
 		11F79CE21ED4723A007F68E4 /* StripTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StripTableViewCell.swift; path = Home/Cell/StripTableViewCell.swift; sourceTree = "<group>"; };
 		50CA44CB8A5F02FB70F1B029 /* Pods-Programador.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Programador.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Programador/Pods-Programador.debug.xcconfig"; sourceTree = "<group>"; };
@@ -69,6 +70,7 @@
 		113D14E21ECF2390001A9DF7 /* Programador */ = {
 			isa = PBXGroup;
 			children = (
+				116471B51ED7523B005AEBA4 /* Programador.entitlements */,
 				119244601ED6710100C5347E /* Extension */,
 				113D14F81ECF242C001A9DF7 /* Network */,
 				113D14F51ECF23C6001A9DF7 /* Home */,
@@ -177,6 +179,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = PR4H86B79Z;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -393,6 +400,7 @@
 			baseConfigurationReference = 50CA44CB8A5F02FB70F1B029 /* Pods-Programador.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Programador/Programador.entitlements;
 				DEVELOPMENT_TEAM = PR4H86B79Z;
 				INFOPLIST_FILE = Programador/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -407,6 +415,7 @@
 			baseConfigurationReference = 04F61A652571335A2743133D /* Pods-Programador.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Programador/Programador.entitlements;
 				DEVELOPMENT_TEAM = PR4H86B79Z;
 				INFOPLIST_FILE = Programador/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

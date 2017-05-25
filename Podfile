@@ -6,7 +6,8 @@ pod 'Alamofire'
 pod 'AlamofireImage'
 pod 'SWXMLHash'
 pod 'Kanna'
-pod 'ImageViewer'
+pod 'JSQWebViewController'
+pod 'KVLoading'
 end
 
 post_install do |installer|

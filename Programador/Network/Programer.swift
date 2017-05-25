@@ -28,6 +28,7 @@ class Programmer{
             for elem in xml["rss"]["channel"]["item"].all {
                 let strip = Strip(build: {
                     $0.title = elem["title"].element!.text!
+                    $0.link = elem["link"].element!.text!
                     $0.content = elem["content:encoded"].element!.text!
                     if let doc = HTML(html: elem["content:encoded"].element!.text!, encoding: .utf8) {
                         // Search for nodes by XPath
@@ -35,7 +36,6 @@ class Programmer{
                             //Check if the link contain a "tirinha" string
                             if link["src"]?.range(of: "tirinha") != nil{
                                 $0.imageURL = link["src"]!
-                                print(link["src"]!)
                                 break
                             }
                         }

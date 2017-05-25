@@ -2,24 +2,27 @@ PODS:
   - Alamofire (4.4.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
-  - ImageViewer (4.1.0)
+  - JSQWebViewController (5.0.0)
   - Kanna (2.2.1)
+  - KVLoading (1.2)
   - SWXMLHash (3.1.0)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
-  - ImageViewer
+  - JSQWebViewController
   - Kanna
+  - KVLoading
   - SWXMLHash
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
-  ImageViewer: 163e5832e0a09e31a3e3482cce6e5e9029356174
+  JSQWebViewController: 0461aa42612b221571556df61d9c09f080cb2eef
   Kanna: 182789ab065e8f9a6ccc2a74ce6283d3401c0c4a
+  KVLoading: fcf0f90a74273ea6a8e397aa62abbe8cda9739c4
   SWXMLHash: d2a672ac416d71099aea91d2b4b9fa871eb09f94
 
-PODFILE CHECKSUM: 42db37ec0f5e75f111c30b1a70ce4f172fe3bd67
+PODFILE CHECKSUM: 69cd45825e0788cd37693e8133c47293cce854b8
 
 COCOAPODS: 1.2.0
