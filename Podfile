@@ -6,8 +6,10 @@ pod 'Alamofire'
 pod 'AlamofireImage'
 pod 'SWXMLHash'
 pod 'Kanna'
-pod 'JSQWebViewController'
+pod 'Agrume'
 pod 'KVLoading'
+pod 'Fabric'
+pod 'Crashlytics'
 end
 
 post_install do |installer|

@@ -9,27 +9,19 @@
 //
 
 import Foundation
+import SWXMLHash
 
-protocol StripProtocol {
-    var title:String { get }
-    var link:String { get }
-    var pubDate:String { get }
-    var creator:String { get }
-    var description:String { get }
-    var content:String { get }
-    var imageURL:String? { get }
-}
-
-class Strip : StripProtocol {
-    var title:String = ""
-    var link:String = ""
-    var pubDate:String = ""
-    var creator:String = ""
-    var description:String = ""
-    var content:String = ""
+struct Strip {
+    var title:String?
+    var link:String?
+    var pubDate:String?
+    var creator:String?
+    var description:String?
+    var content:String?
     var imageURL:String?
-    typealias buildStripClosure = (Strip) -> Void
-    init(build:buildStripClosure) {
-        build(self)
+    
+    init(fromElement element:XMLIndexer) {
+        self.title = element["title"].element!.text!
+        self.link = element["link"].element!.text!
     }
 }

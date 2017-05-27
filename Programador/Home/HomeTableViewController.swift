@@ -7,8 +7,11 @@
 //
 
 import UIKit
-import JSQWebViewController
 import KVLoading
+import Agrume
+import Crashlytics
+
+
 
 class HomeTableViewController: UITableViewController {
 
@@ -16,8 +19,11 @@ class HomeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Answers.logContentView(withName: "Home", contentType: "Table View", contentId: nil, customAttributes: nil)
         self.loadData()
     }
+    
+
     
     @IBAction func loadData(){
         KVLoading.show()
@@ -50,10 +56,14 @@ class HomeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let controller = WebViewController(url: NSURL(string: strips[indexPath.row].link)! as URL)
-        let nav = UINavigationController(rootViewController: controller)
-        present(nav, animated: true, completion: nil)
+        let cell = tableView.cellForRow(at: indexPath) as! StripTableViewCell
+        let strip = strips[indexPath.row]
+        Answers.logContentView(withName:strip.title , contentType: strip.imageURL, contentId: nil, customAttributes: nil)
+        if let image = cell.stripImageView.image {
+            let agrume = Agrume(image: image ,backgroundColor: .black)
+            agrume.hideStatusBar = true
+            agrume.showFrom(self)
+        }
     }
 }
 
