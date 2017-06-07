@@ -16,20 +16,23 @@ import Crashlytics
 class HomeTableViewController: UITableViewController {
 
     var strips = [Strip]()
-    
+    var error:Error?
     override func viewDidLoad() {
         super.viewDidLoad()
         Answers.logContentView(withName: "Home", contentType: "Table View", contentId: nil, customAttributes: nil)
         self.loadData()
     }
     
-
-    
     @IBAction func loadData(){
         KVLoading.show()
-        Programmer.getRSSData { (strips) in
+        Programmer.getRSSData { (strips,error) in
             KVLoading.hide()
-            self.strips = strips
+            if let error = error{
+                self.error = error
+                print(error)
+            }else{
+                self.strips = strips!
+            }
             self.tableView?.reloadData()
         }
     }
@@ -44,10 +47,17 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if error != nil {
+            return 1
+        }
         return strips.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if error != nil {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellError")
+            return cell!
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! StripTableViewCell
         cell.title.text = strips[indexPath.row].title
         cell.configureCell(with: strips[indexPath.row].imageURL)
@@ -56,6 +66,10 @@ class HomeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if error != nil {
+            return
+        }
+        
         let cell = tableView.cellForRow(at: indexPath) as! StripTableViewCell
         let strip = strips[indexPath.row]
         Answers.logContentView(withName:strip.title , contentType: strip.imageURL, contentId: nil, customAttributes: nil)
@@ -64,6 +78,15 @@ class HomeTableViewController: UITableViewController {
             agrume.hideStatusBar = true
             agrume.showFrom(self)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if error != nil {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellError")
+            return cell!.contentView.frame.size.height
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! StripTableViewCell
+        return cell.contentView.frame.size.height
     }
 }
 

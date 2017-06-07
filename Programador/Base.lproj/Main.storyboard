@@ -66,6 +66,34 @@
                                     <outlet property="title" destination="Jnm-u7-BDR" id="lJI-jX-7UG"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellError" rowHeight="413" id="6NF-h3-Yf4">
+                                <rect key="frame" x="0.0" y="228" width="375" height="413"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6NF-h3-Yf4" id="Mgu-px-ft7">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="412.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="\* Erro *\" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEx-gc-6qK">
+                                            <rect key="frame" x="10" y="10" width="355" height="21"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="tirinha404" translatesAutoresizingMaskIntoConstraints="NO" id="C0j-Rl-dtM">
+                                            <rect key="frame" x="0.0" y="41" width="375" height="371.5"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="C0j-Rl-dtM" firstAttribute="top" secondItem="oEx-gc-6qK" secondAttribute="bottom" constant="10" id="9Mp-vT-z6x"/>
+                                        <constraint firstItem="oEx-gc-6qK" firstAttribute="leading" secondItem="Mgu-px-ft7" secondAttribute="leading" constant="10" id="Po0-6k-M8F"/>
+                                        <constraint firstAttribute="trailing" secondItem="C0j-Rl-dtM" secondAttribute="trailing" id="RPf-w2-ovd"/>
+                                        <constraint firstItem="C0j-Rl-dtM" firstAttribute="leading" secondItem="Mgu-px-ft7" secondAttribute="leading" id="XuL-hz-cez"/>
+                                        <constraint firstAttribute="bottom" secondItem="C0j-Rl-dtM" secondAttribute="bottom" id="dzf-c5-B4e"/>
+                                        <constraint firstAttribute="trailing" secondItem="oEx-gc-6qK" secondAttribute="trailing" constant="10" id="eKr-1g-46l"/>
+                                        <constraint firstItem="oEx-gc-6qK" firstAttribute="top" secondItem="Mgu-px-ft7" secondAttribute="top" constant="10" id="rAm-EJ-x8a"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="dce-2J-fOU" id="9Kt-rY-Lt4"/>
@@ -82,7 +110,10 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c4b-3J-eLG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="654.375" y="143.66197183098592"/>
+            <point key="canvasLocation" x="653.60000000000002" y="143.47826086956522"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tirinha404" width="255" height="380"/>
+    </resources>
 </document>

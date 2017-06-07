@@ -155,6 +155,7 @@
 				113D14DE1ECF2390001A9DF7 /* Resources */,
 				9AAF6394AD31C66F653F9BAA /* [CP] Embed Pods Frameworks */,
 				A08310348A8D5DAFA7884B2C /* [CP] Copy Pods Resources */,
+				116471B61EDA0DA4005AEBA4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -177,7 +178,7 @@
 				TargetAttributes = {
 					113D14DF1ECF2390001A9DF7 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = PR4H86B79Z;
+						DevelopmentTeam = G28XQH8SA5;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -219,6 +220,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		116471B61EDA0DA4005AEBA4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 88186160ffa7a0c7866339f480ebc7de475b279f 219038b5d1fefb897cde8244abd333a6f26e6144977ae8c4c6247bf0b333dd9a";
+		};
 		88F6FED3ACA486B6B759BD79 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -401,10 +415,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Programador/Programador.entitlements;
-				DEVELOPMENT_TEAM = PR4H86B79Z;
+				DEVELOPMENT_TEAM = G28XQH8SA5;
 				INFOPLIST_FILE = Programador/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.creativedev.Programador;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.iorsbr.vidadeprogramador;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -416,10 +430,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Programador/Programador.entitlements;
-				DEVELOPMENT_TEAM = PR4H86B79Z;
+				DEVELOPMENT_TEAM = G28XQH8SA5;
 				INFOPLIST_FILE = Programador/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.creativedev.Programador;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.iorsbr.vidadeprogramador;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
