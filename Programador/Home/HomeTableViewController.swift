@@ -10,31 +10,84 @@ import UIKit
 import KVLoading
 import Agrume
 import Crashlytics
-
-
+import RealmSwift
+import Kingfisher
 
 class HomeTableViewController: UITableViewController {
-
-    var strips = [Strip]()
-    var error:Error?
+    var strips:Results<Strip>?
+    private lazy var dateFormatter:DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/mm/yyyy"
+        return dateFormatter
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         Answers.logContentView(withName: "Home", contentType: "Table View", contentId: nil, customAttributes: nil)
         self.loadData()
+        self.loadXMLData()
+    }
+    
+    func loadXMLData(){
+        Programmer.shared.getRSSData { (xmlStrips, error) in
+            if let xmls = xmlStrips{
+                for s in xmls{
+                    print(s)
+                }
+            }
+        }
     }
     
     @IBAction func loadData(){
         KVLoading.show()
-        Programmer.getRSSData { (strips,error) in
+        Programmer.shared.realmLogin { (success) in
             KVLoading.hide()
-            if let error = error{
-                self.error = error
-                print(error)
+            if success{
+                let realm = try! Realm()
+                self.strips = realm.objects(Strip.self)
+                self.tableView.reloadData()
+                self.createNotification()
             }else{
-                self.strips = strips!
+                //TODO: error
+                //Show localy data
+                let realm = try! Realm()
+                self.strips = realm.objects(Strip.self)
+                self.tableView.reloadData()
             }
-            self.tableView?.reloadData()
         }
+    }
+    
+    var notificationToken: NotificationToken? = nil
+    func createNotification(){
+        let realm = try! Realm()
+        self.strips = realm.objects(Strip.self)
+        
+        // Observe Results Notifications
+        notificationToken = self.strips?.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                tableView.reloadData()
+                break
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the UITableView
+                tableView.beginUpdates()
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                     with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.endUpdates()
+                break
+            case .error(let error):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(error)")
+                break
+            }
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,32 +100,28 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if error != nil {
-            return 1
-        }
-        return strips.count
+        return strips?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if error != nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellError")
-            return cell!
-        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! StripTableViewCell
-        cell.title.text = strips[indexPath.row].title
-        cell.configureCell(with: strips[indexPath.row].imageURL)
+        let strip = strips?[indexPath.row]
+        cell.shareButton.strip = strip
+        cell.title.text = strip?.title
+        cell.pubDate.text = self.dateFormatter.string(from: strip?.pubDate ?? Date())
+        cell.shareButton.addTarget(self, action: #selector(self.share(sender:)), for: .touchUpInside)
+        cell.shareButton.indexPath = indexPath
+        if let photoURL = strip?.imageURL{
+            cell.stripImageView.kf.setImage(with: URL(string:photoURL))
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if error != nil {
-            return
-        }
-        
         let cell = tableView.cellForRow(at: indexPath) as! StripTableViewCell
-        let strip = strips[indexPath.row]
-        Answers.logContentView(withName:strip.title , contentType: strip.imageURL, contentId: nil, customAttributes: nil)
+        let strip = strips?[indexPath.row]
+        Answers.logContentView(withName:strip?.title , contentType: strip?.imageURL, contentId: nil, customAttributes: nil)
         if let image = cell.stripImageView.image {
             let agrume = Agrume(image: image ,backgroundColor: .black)
             agrume.hideStatusBar = true
@@ -81,13 +130,47 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if error != nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellError")
-            return cell!.contentView.frame.size.height
-        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! StripTableViewCell
         return cell.contentView.frame.size.height
     }
+}
+
+extension HomeTableViewController{
+    
+    @IBAction func share(sender:ShareButton){
+        guard let strip = sender.strip else{
+            return
+        }
+        guard let firstActivityItem = strip.title else{
+            return
+        }
+        guard let secondActivityItem = URL(string: strip.link!) else{
+            return
+        }
+        
+        guard let image = (tableView.cellForRow(at: sender.indexPath!) as! StripTableViewCell).stripImageView.image else{
+            return
+        }
+        
+        let activityViewController : UIActivityViewController = UIActivityViewController(
+            activityItems: [firstActivityItem, secondActivityItem, image], applicationActivities: nil)
+        
+        // This lines is for the popover you need to show in iPad
+        activityViewController.popoverPresentationController?.sourceView = (sender )
+        
+        // This line remove the arrow of the popover to show in iPad
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+        
+        // Anything you want to exclude
+        activityViewController.excludedActivityTypes = [
+            .saveToCameraRoll,
+        ]
+        
+        self.present(activityViewController, animated: true, completion: nil)
+        
+        
+    }
+    
 }
 
 

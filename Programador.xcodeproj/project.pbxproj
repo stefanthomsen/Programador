@@ -16,6 +16,7 @@
 		113D14FD1ECF3E12001A9DF7 /* Strip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D14FC1ECF3E12001A9DF7 /* Strip.swift */; };
 		119244641ED6718200C5347E /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119244631ED6718200C5347E /* Extension.swift */; };
 		11F79CE31ED4723A007F68E4 /* StripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F79CE21ED4723A007F68E4 /* StripTableViewCell.swift */; };
+		11FBB7CB1F537F0D00358F58 /* ShareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FBB7CA1F537F0D00358F58 /* ShareButton.swift */; };
 		89AC711EE4B86C2E29C0F2DB /* Pods_Programador.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29D1BE921ACBD2EBD2F5F75 /* Pods_Programador.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		116471B51ED7523B005AEBA4 /* Programador.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Programador.entitlements; sourceTree = "<group>"; };
 		119244631ED6718200C5347E /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = Extension/Extension.swift; sourceTree = "<group>"; };
 		11F79CE21ED4723A007F68E4 /* StripTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StripTableViewCell.swift; path = Home/Cell/StripTableViewCell.swift; sourceTree = "<group>"; };
+		11FBB7CA1F537F0D00358F58 /* ShareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareButton.swift; path = Extension/ShareButton.swift; sourceTree = "<group>"; };
 		50CA44CB8A5F02FB70F1B029 /* Pods-Programador.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Programador.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Programador/Pods-Programador.debug.xcconfig"; sourceTree = "<group>"; };
 		C29D1BE921ACBD2EBD2F5F75 /* Pods_Programador.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Programador.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				119244631ED6718200C5347E /* Extension.swift */,
+				11FBB7CA1F537F0D00358F58 /* ShareButton.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -245,7 +248,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9AAF6394AD31C66F653F9BAA /* [CP] Embed Pods Frameworks */ = {
@@ -285,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11FBB7CB1F537F0D00358F58 /* ShareButton.swift in Sources */,
 				113D14FD1ECF3E12001A9DF7 /* Strip.swift in Sources */,
 				119244641ED6718200C5347E /* Extension.swift in Sources */,
 				113D14F71ECF23E1001A9DF7 /* HomeTableViewController.swift in Sources */,

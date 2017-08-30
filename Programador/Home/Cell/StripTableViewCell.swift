@@ -6,33 +6,30 @@
 //  Copyright © 2017 Creative Dev. All rights reserved.
 //
 
-import Alamofire
-import AlamofireImage
+
 import Foundation
 import UIKit
 
 class StripTableViewCell: UITableViewCell {
+    var strip:Strip? = nil
     @IBOutlet weak var title:UILabel!
+    @IBOutlet weak var pubDate:UILabel!
     @IBOutlet weak var stripImageView:UIImageView!
+    @IBOutlet weak var containerView:UIView!
+    @IBOutlet weak var shareButton:ShareButton!
     
-    func configureCell(with URLString: String!) {
-        guard let urlString = URLString else {
-            //TODO: handle blank url
-            return
-        }
-        let size = stripImageView.frame.size
-        stripImageView.af_setImage(
-            withURL: URL(string: urlString)!,
-            placeholderImage: nil,
-            filter: AspectScaledToFitSizeFilter(size: size),
-            imageTransition: .crossDissolve(0.5)
-        )
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        containerView.layer.cornerRadius = 10
+        containerView.layer.borderWidth = 1
+        containerView.layer.borderColor = UIColor.white.cgColor
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        stripImageView.af_cancelImageRequest()
         stripImageView.layer.removeAllAnimations()
         stripImageView.image = nil
     }
+        
 }
